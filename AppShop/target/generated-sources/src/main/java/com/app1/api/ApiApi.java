@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 import javax.annotation.Generated;
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-10-01T16:15:56.384160700+02:00[Europe/Rome]", comments = "Generator version: 7.8.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-10-01T17:11:19.027143200+02:00[Europe/Rome]", comments = "Generator version: 7.8.0")
 @Validated
 @Tag(name = "api", description = "the api API")
 public interface ApiApi {
@@ -66,7 +66,7 @@ public interface ApiApi {
         produces = { "application/json" }
     )
     
-    default ResponseEntity<List<entity.Acquisto>> apiAcquistiGet(
+    default ResponseEntity<List<Acquisto>> apiAcquistiGet(
         
     ) {
         getRequest().ifPresent(request -> {
@@ -105,7 +105,7 @@ public interface ApiApi {
         value = "/api/acquisti/{id}"
     )
     
-    default ResponseEntity<entity.Acquisto> apiAcquistiIdDelete(
+    default ResponseEntity<Void> apiAcquistiIdDelete(
         @Parameter(name = "id", description = "ID dell'acquisto da cancellare", required = true, in = ParameterIn.PATH) @PathVariable("id") Integer id
     ) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
@@ -138,7 +138,7 @@ public interface ApiApi {
         produces = { "application/json" }
     )
     
-    default ResponseEntity<entity.Acquisto> apiAcquistiIdGet(
+    default ResponseEntity<ApiAcquistiIdGet200Response> apiAcquistiIdGet(
         @Parameter(name = "id", description = "ID dell'acquisto", required = true, in = ParameterIn.PATH) @PathVariable("id") Integer id
     ) {
         getRequest().ifPresent(request -> {
@@ -208,7 +208,7 @@ public interface ApiApi {
         produces = { "application/json" }
     )
     
-    default ResponseEntity<List<entity.Calzatura>> apiCalzatureGet(
+    default ResponseEntity<List<Calzatura>> apiCalzatureGet(
         
     ) {
         getRequest().ifPresent(request -> {

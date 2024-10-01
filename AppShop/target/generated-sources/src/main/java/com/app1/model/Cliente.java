@@ -18,7 +18,7 @@ import javax.annotation.Generated;
  * Cliente
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-10-01T16:15:56.384160700+02:00[Europe/Rome]", comments = "Generator version: 7.8.0")
+@Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2024-10-01T17:11:19.027143200+02:00[Europe/Rome]", comments = "Generator version: 7.8.0")
 public class Cliente {
 
   private Integer idCliente;
