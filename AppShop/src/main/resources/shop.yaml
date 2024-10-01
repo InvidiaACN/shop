@@ -1,0 +1,335 @@
+openapi: 3.0.0
+
+info:
+  title: Shoe Store API
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+
+paths:
+  /api/calzature:
+    get:
+      summary: Ottieni una lista di calzature
+      responses:
+        '200':
+          description: Lista di calzature disponibile con successo
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Calzatura'
+        '500':
+          description: Errore interno del server
+    post:
+      summary: Aggiungi una nuova calzatura
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Calzatura'
+      responses:
+        '201':
+          description: Calzatura creata con successo
+        '400':
+          description: Richiesta non valida
+        '500':
+          description: Errore interno del server
+
+  /api/calzature/{id}:
+    get:
+      summary: Ottieni una singola calzatura tramite ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID della calzatura
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Dettagli della calzatura recuperati con successo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Calzatura'
+        '404':
+          description: Calzatura non trovata
+        '500':
+          description: Errore interno del server
+
+    put:
+      summary: Aggiorna una calzatura esistente
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID della calzatura da aggiornare
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Calzatura'
+      responses:
+        '200':
+          description: Calzatura aggiornata con successo
+        '404':
+          description: Calzatura non trovata
+        '400':
+          description: Dati non validi
+        '500':
+          description: Errore interno del server
+
+    delete:
+      summary: Cancella una calzatura tramite ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID della calzatura da cancellare
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Calzatura cancellata con successo
+        '404':
+          description: Calzatura non trovata
+        '500':
+          description: Errore interno del server
+
+  /api/clienti:
+    get:
+      summary: Lista dei clienti
+      responses:
+        '200':
+          description: Lista dei clienti ottenuta con successo
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cliente'
+        '500':
+          description: Errore interno del server
+    post:
+      summary: Aggiungi un nuovo cliente
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+      responses:
+        '201':
+          description: Cliente creato con successo
+        '400':
+          description: Richiesta non valida
+        '500':
+          description: Errore interno del server
+
+  /api/clienti/{id_cliente}:
+    get:
+      summary: Cerca cliente per ID
+      parameters:
+        - name: id_cliente
+          in: path
+          required: true
+          description: ID del cliente
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Dettagli del cliente recuperati con successo
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cliente'
+        '404':
+          description: Cliente non trovato
+        '500':
+          description: Errore interno del server
+
+    put:
+      summary: Aggiorna un cliente esistente
+      parameters:
+        - name: id_cliente
+          in: path
+          required: true
+          description: ID del cliente da aggiornare
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cliente'
+      responses:
+        '200':
+          description: Cliente aggiornato con successo
+        '404':
+          description: Cliente non trovato
+        '400':
+          description: Dati non validi
+        '500':
+          description: Errore interno del server
+
+    delete:
+      summary: Cancella un cliente tramite ID
+      parameters:
+        - name: id_cliente
+          in: path
+          required: true
+          description: ID del cliente da cancellare
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Cliente cancellato con successo
+        '404':
+          description: Cliente non trovato
+        '500':
+          description: Errore interno del server
+    
+  /api/acquisti:
+    get:
+      summary: Ottieni una lista di acquisti
+      responses:
+        '200':
+          description: Lista di acquisti disponibile con successo
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Acquisto'
+        '500':
+          description: Errore interno del server
+    post:
+      summary: Aggiungi un nuovo acquisto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Acquisto'
+      responses:
+        '201':
+          description: Acquisto creato con successo
+        '400':
+          description: Richiesta non valida
+        '500':
+          description: Errore interno del server
+
+  /api/acquisti/{id}:
+    get:
+      summary: Ottieni un acquisto tramite ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID dell'acquisto
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Dettagli dell'acquisto recuperati con successo
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: ID univoco dell'acquisto
+                  id_cliente:
+                    type: integer
+                    description: ID del cliente che ha effettuato l'acquisto
+                  id_calzatura:
+                    type: integer
+                    description: ID della calzatura acquistata
+                  nome_calzatura:
+                    type: string
+                    description: Nome della calzatura acquistata
+                    example: "Sneaker comode per l'uso quotidiano."
+        '404':
+          description: Acquisto non trovato
+        '500':
+          description: Errore interno del server
+
+    delete:
+      summary: Cancella un acquisto tramite ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID dell'acquisto da cancellare
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Acquisto cancellato con successo
+        '404':
+          description: Acquisto non trovato
+        '500':
+          description: Errore interno del server
+
+components:
+  schemas:
+    Calzatura:
+      type: object
+      required:
+        - id
+        - nome
+        - descrizione
+        - taglia
+      properties:
+        id:
+          type: integer
+          description: ID univoco della calzatura
+        nome:
+          type: string
+          description: Nome della calzatura
+        descrizione:
+          type: string
+          description: Descrizione della calzatura
+          example: "Sneaker comode per l'uso quotidiano."
+        taglia:
+          type: string
+          description: Taglia della calzatura
+          example: "42"
+
+    Cliente:
+      type: object
+      required:
+        - id_cliente
+        - nome
+      properties:
+        id_cliente:
+          type: integer
+          description: ID cliente
+        nome:
+          type: string
+          description: Nome del cliente
+          
+    Acquisto:
+      type: object
+      required:
+        - id
+        - id_cliente
+        - id_calzatura
+      properties:
+        id:
+          type: integer
+          description: ID univoco dell'acquisto
+        id_cliente:
+          type: integer
+          description: ID del cliente che ha effettuato l'acquisto
+        id_calzatura:
+          type: integer
+          description: ID della calzatura acquistata
